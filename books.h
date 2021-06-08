@@ -12,7 +12,7 @@ public:
     char press[50];
     int pressYear;
     //反正都要给main操作，干嘛要设置成private呢QwQ
-    string returnInformation(); //返回格式化好的string
+    char *returnInformation(); //返回格式化好的char*
     book(/* args */);
     ~book();
 };
