@@ -5,7 +5,23 @@
 using namespace std;
 //全局变量
 books *HEADP;
-bool strToVar(string str) { return OK; }
+
+void err()
+{
+    cout << "输入指令有误！" << endl;
+}
+
+bool check(int &pos)
+{
+    if (!(cin >> pos))
+    {
+        cin.clear();
+        cin.sync();
+        err();
+        return false;
+    }
+    return true;
+}
 
 void init() //创建链表
 {
@@ -85,11 +101,7 @@ void findBook()
     //输出提示
     //判断输入
     char tmpInput[50];
-    if (getLineVar(cin, tmpInput) == ERR)
-    {
-        err();
-        return;
-    }
+    cin >> tmpInput;
     //遍历，与returnInformation匹配
     if (/*匹配到了*/)
     {
@@ -104,9 +116,8 @@ void sortBook()
     //判断输入，获取排序类型
     int method;     //按照不同的元素排序
     bool order = 0; //0升序，1降序
-    if (getLineVar(cin, method) == ERR)
+    if (!check(method))
     {
-        err();
         return;
     }
     //冒泡排序………………
@@ -131,14 +142,13 @@ void store()
 }
 int main()
 {
-    int option;
+    int option = 0;
     init();
     do
     {
         printInterface();
-        if (getLineVar(cin, option) == ERR /*或者option超出范围*/)
+        if (!check(option) /*或者option超出范围*/)
         {
-            err();
             continue;
         }
         switch (option)
