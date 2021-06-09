@@ -1,18 +1,19 @@
 #pragma once
 
-class book
-{
-
+class Book{
 public:
     //图书编号、书名、作者、价格、出版社、出版年份
     int num;
-    int name;
+    char name[50];
     char author[50];
     double price;
     char press[50];
     int pressYear;
-    //反正都要给main操作，干嘛要设置成private呢QwQ
+    
     char *returnInformation(); //返回格式化好的char*
-    book(/* args */);
-    ~book();
+    void printInformation(); //打印格式化好的char*
+
+    Book(/* args */);
+    Book(int _num, char _name[50],char _author[50], double _price, char _press[50], int _pressYear);
+    ~Book();
 };

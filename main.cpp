@@ -2,8 +2,9 @@
 #include "main.h"
 #include "books.h"
 using namespace std;
+
 //全局变量
-book* HEADP = NULL;
+Book* HEADP = nullptr;
 
 int main()
 {
@@ -39,7 +40,11 @@ int main()
         case 7: //数据保存
             store();
             break;
+        case 8: //退出
+            store();
+            break;
         default:
+            err();
             break;
         }
     } while (option == QUIT);

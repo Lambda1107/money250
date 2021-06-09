@@ -5,14 +5,14 @@
 using namespace std;
 
 //全局定义
-#define QUIT 9
+#define QUIT 8
 #define ERR 10
 #define OK 11
 extern books *HEADP;
 //链表结构声明
 struct books
 {
-    book data;
+    Book data;
     books *next;
 };
 

@@ -1,23 +1,7 @@
 #include <fstream>
 #include "main.h"
+#include "utils.h"
 using namespace std;
-
-void err()
-{
-    cout << "输入指令有误！" << endl;
-}
-
-bool check(int &pos)
-{
-    if (!(cin >> pos))
-    {
-        cin.clear();
-        cin.sync();
-        err();
-        return false;
-    }
-    return true;
-}
 
 void init() //创建链表
 {
@@ -28,7 +12,7 @@ void init() //创建链表
     while (!fin.eof())
     {
         pbooks1 = pbooks;
-        fin.read((char *)(&pbooks->data), sizeof(book));
+        fin.read((char *)(&pbooks->data), sizeof(Book));
         pbooks->next = new books;
         pbooks = pbooks->next;
     } //读到文件尾了就退出
@@ -40,45 +24,81 @@ void init() //创建链表
 void printInterface()
 {
     system("cls");
-    //打印出主界面
+    cout << "         图书管理" << endl; puts("");
+    cout << "[1]    显示图书数据" << endl; puts("");
+    cout << "[2]	插入图书数据" << endl; puts("");
+    cout << "[3]	删除图书数据" << endl; puts("");
+    cout << "[4]	修改图书数据" << endl; puts("");
+    cout << "[5]	数据查询" << endl; puts("");
+    cout << "[6]	数据排序" << endl; puts("");
+    cout << "[7]    退出程序" << endl; puts("");
 }
 
-void listBooks()
-{
-    //遍历链表输出returnInformation返回的string
+void listBooks(){
+//遍历链表打印信息
+    books* p = HEADP;
+    if (!p){
+        cout << "图书数据为空" << endl;
+    }
+
+    while (p){
+        p->data.printInformation();
+    }
 }
 
 void insertBook()
 {
-    //输出提示
-    //判断输入
     int pos;
-    //遍历出对应pos前一个的地址以及pos的地址
-    books *pBooks1;
-    books *pBooks2;
-    //new出新book
-    //让用户输入
-    books *tmpBooks = new books();
-    //插入
-    pBooks1->next = tmpBooks;
-    tmpBooks->next = pBooks2;
-    //ojbk
+    cout << "请输入要插入到的位置： ";
+    if(!check(pos)){
+        err();
+        return;
+    }
+    
+    books *dummuHead = new books;
+    dummuHead->next = HEADP;
+
+    books *pBooks = dummuHead;
+
+    if(!findPos(pos, pBooks)){
+        return;
+    }
+
+    books* tmpBooks = new books;
+    inputBookInfo(tmpBooks);
+
+    tmpBooks->next = pBooks->next;
+    pBooks->next = tmpBooks;
+
+    HEADP = dummuHead->next;
+    delete dummuHead;
 }
 
 void deleteBook()
 {
-    //输出提示
-    //判断输入
     int pos;
+    cout << "请输入要插入到的位置： ";
+    if(!check(pos)){
+        err();
+        return;
+    }
+    
     //遍历出对应pos前一个的地址以及pos的地址
-    books *pBooks1;
-    books *pBooks2;
+    books *dummuHead = new books;//虚拟头节点
+    dummuHead->next = HEADP;
+
+    books *pBooks = dummuHead;
+
+    if(!findPos(pos, pBooks)){
+        return;
+    }
+
     //记录下一个的地址
-    books *tmpBook = pBooks2->next;
+    books *tmpBook = pBooks->next;
     //删除
-    delete pBooks2;
+    delete pBooks;
     //接上
-    pBooks1->next = tmpBook;
+    pBooks->next = tmpBook;
     //ojbk
 }
 
@@ -135,4 +155,12 @@ void sortBook()
 void store()
 {
     //跟load一样的，二进制存法
+    fstream fout("database", ios::binary | ios::out);
+    books* pbooks = HEADP;
+    while (pbooks){
+        fout.write((char *)(&pbooks->data), sizeof(Book));
+        pbooks = pbooks->next;
+    } 
+    delete pbooks;
+    fout.close();
 }
