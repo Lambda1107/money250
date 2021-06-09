@@ -57,7 +57,6 @@ void insertBook()
     
     books *dummuHead = new books;
     dummuHead->next = HEADP;
-
     books *pBooks = dummuHead;
 
     if(!findPos(pos, pBooks)){
@@ -77,39 +76,55 @@ void insertBook()
 void deleteBook()
 {
     int pos;
-    cout << "请输入要插入到的位置： ";
+    cout << "请输入要删除的位置： ";
     if(!check(pos)){
         err();
         return;
     }
     
-    //遍历出对应pos前一个的地址以及pos的地址
-    books *dummuHead = new books;//虚拟头节点
+    books *dummuHead = new books;
     dummuHead->next = HEADP;
+    books *pBooks = dummuHead;
 
+    if(!findPos(pos-1, pBooks)){
+        //找要删除对象的前一个结点
+        return;
+    }
+
+    if(!pBooks->next){
+        err();
+        return;
+    }
+
+    books *ptmp = pBooks->next;
+    pBooks->next = pBooks->next->next;
+    delete ptmp;
+
+    HEADP = dummuHead->next;
+    delete dummuHead;
+}
+
+void modifyBook()
+{
+    int pos;
+    cout << "请输入要修改的位置： ";
+    if(!check(pos)){
+        err();
+        return;
+    }
+    
+    books *dummuHead = new books;
+    dummuHead->next = HEADP;
     books *pBooks = dummuHead;
 
     if(!findPos(pos, pBooks)){
         return;
     }
 
-    //记录下一个的地址
-    books *tmpBook = pBooks->next;
-    //删除
-    delete pBooks;
-    //接上
-    pBooks->next = tmpBook;
-    //ojbk
-}
+    inputBookInfo(pBooks);
 
-void modifyBook()
-{
-    //输出提示
-    //判断输入
-    int pos;
-    //遍历出对应pos的地址
-    books *pBooks1;
-    //修改吧
+    HEADP = dummuHead->next;
+    delete dummuHead;
 }
 
 void findBook()
@@ -119,7 +134,7 @@ void findBook()
     char tmpInput[50];
     cin >> tmpInput;
     //遍历，与returnInformation匹配
-    if (/*匹配到了*/)
+    if (1/*匹配到了*/)
     {
         //输出
     }
@@ -144,7 +159,7 @@ void sortBook()
     switch (method)
     {
     case 1: //…………
-        if (/*规则*/)
+        if (1/*规则*/)
         {
             b = 0;
         }
