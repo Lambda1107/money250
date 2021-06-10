@@ -130,10 +130,80 @@ bool findSomething(T input, int way){
     {
         cout << "未查询到相关信息" << endl;
     }
+    return if_find;
 }
 
 //链表的冒泡函数
-template<typename T>
-books* bobbleSort(){
+void bobbleSort(int way, int order){
+    if(HEADP == NULL || HEADP->next == NULL){
+        cout << "无需要排序的数据" << endl;
+        return;
+    }
+    books *p = NULL;
+    bool isChange = true;
 
+    int op;
+    if(!(check(op))){
+        err();
+        return;
+    }
+
+    switch (way)
+    {
+    case 1: 
+        if(!order){//升序
+            while(p != HEADP->next && isChange)
+            {
+                books *q = HEADP;
+                isChange = false;//标志当前这一轮中又没有发生元素交换，如果没有则表示数组已经有序
+                for(; q->next && q->next != p; q = q->next)
+                {
+                    if(q->data.num > q->next->data.num)
+                    {
+                        swap(q->data, q->next->data);
+                        isChange = true;
+                    }
+                }
+                p = q;
+            }
+        }
+        else{//降序
+            while(p != HEADP->next && isChange)
+            {
+                books *q = HEADP;
+                isChange = false;//标志当前这一轮中又没有发生元素交换，如果没有则表示数组已经有序
+                for(; q->next && q->next != p; q = q->next)
+                {
+                    if(q->data.num < q->next->data.num)
+                    {
+                        swap(q->data, q->next->data);
+                        isChange = true;
+                    }
+                }
+                p = q;
+            }
+        }
+        break;//剩下的排序等测过了直接粘贴很快的
+    case 2: 
+        
+        break;
+    case 3: 
+        
+        break;
+    case 4: 
+        
+        break;
+    case 5: 
+        
+        break;
+    case 6: 
+        
+        break;
+    case 7: 
+        break;
+    default:
+        err();
+        break;
+    }
+    return;
 }

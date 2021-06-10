@@ -237,7 +237,6 @@ void sortBook()
     //冒泡排序………………
     books *pBooks1;
     books *pBooks2;
-    bool b = 0; //b等于0就说明说明pBooks1<pBooks2,如果是降序则替换，升序就不动
     switch (method)
     {
     case 1:  
