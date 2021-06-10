@@ -59,3 +59,77 @@ bool inputBookInfo(books *tmpBooks){
     return true;
 }
 
+//遍历链表查找信息
+template<typename T>
+bool findSomething(T input, int way){
+    books* p = HEADP;
+    if (!p){
+        cout << "图书数据为空" << endl;
+    }
+
+    bool if_find = false;
+
+    switch (way)
+    {
+    case 1: 
+        while (p){
+            if(p->data.num==input){
+                p->data.printInformation();
+                if_find = true;
+            }
+        }
+        break;
+    case 2: 
+        while (p){
+            if(strcmp(p->data.name,input)){
+                p->data.printInformation();
+                if_find = true;
+            }
+        }
+        break;
+    case 3: 
+        while (p){
+            if(strcmp(p->data.author,input)){
+                p->data.printInformation();
+                if_find = true;
+            }
+        }
+        break;
+    case 4: 
+        while (p){
+                if(p->data.price==input){
+                    p->data.printInformation();
+                    if_find = true;
+                }
+            }
+        break;
+    case 5: 
+        while (p){
+            if(strcmp(p->data.press,input)){
+                p->data.printInformation();
+                if_find = true;
+            }
+        }
+        break;
+    case 6: 
+        while (p){
+            if(p->data.pressYear==input){
+                p->data.printInformation();
+                if_find = true;
+            }
+        }
+        break;
+    case 7: 
+        break;
+    default:
+        err();
+        break;
+    }
+
+    if (!if_find)
+    {
+        cout << "未查询到相关信息" << endl;
+    }
+    
+}
+

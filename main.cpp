@@ -15,6 +15,7 @@ int main()
         printInterface();
         if (!check(option) /*或者option超出范围*/)
         {
+            err();
             continue;
         }
         switch (option)
@@ -47,6 +48,7 @@ int main()
             err();
             break;
         }
-    } while (option == QUIT);
+    } while (option != QUIT);
     store();
+    cout << "感谢使用" << endl;
 }

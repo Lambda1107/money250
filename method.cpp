@@ -130,15 +130,83 @@ void modifyBook()
 void findBook()
 {
     //输出提示
+    cout << "         图书查询方式" << endl; puts("");
+    cout << "[1]    图书编号" << endl; puts("");
+    cout << "[2]	书名" << endl; puts("");
+    cout << "[3]	作者" << endl; puts("");
+    cout << "[4]	价格" << endl; puts("");
+    cout << "[5]	出版商" << endl; puts("");
+    cout << "[6]	出版年份" << endl; puts("");
+    cout << "[7]    返回上一级功能" << endl; puts("");
     //判断输入
-    char tmpInput[50];
-    cin >> tmpInput;
-    //遍历，与returnInformation匹配
-    if (1/*匹配到了*/)
+    int option = 0;
+    do
     {
-        //输出
-    }
-    //继续查找，直到指针指向NULL
+        printInterface();
+        if (!check(option) /*或者option超出范围*/)
+        {
+            err();
+            option = QUIT;
+        }
+        switch (option)
+        {
+        case 1: 
+            int input;
+            if(!check(input)){
+                err();
+                return;
+            }
+            findSomething(input, 1);
+            break;
+        case 2: 
+            char input[50];
+            if(!check(input)){
+                err();
+                return;
+            }
+            findSomething(input, 2);
+            break;
+        case 3: 
+            char input[50];
+            if(!check(input)){
+                err();
+                return;
+            }
+            findSomething(input, 3);
+            break;
+        case 4: 
+            double input;
+            if(!check(input)){
+                err();
+                return;
+            }
+            findSomething(input, 4);
+            break;
+        case 5: 
+            char input[50];
+            if(!check(input)){
+                err();
+                return;
+            }
+            findSomething(input, 5);
+            break;
+        case 6: 
+            int input;
+            if(!check(input)){
+                err();
+                return;
+            }
+            findSomething(input, 6);
+            break;
+        case 7: 
+            option = QUIT;
+            break;
+
+        default:
+            err();
+            break;
+        }
+    } while (option != QUIT);
 }
 
 void sortBook()
