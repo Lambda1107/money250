@@ -212,27 +212,56 @@ void findBook()
 void sortBook()
 {
     //输出提示
-    //判断输入，获取排序类型
+    cout << "         排序方式" << endl; puts("");
+    cout << "[1]    图书编号" << endl; puts("");
+    cout << "[2]	书名" << endl; puts("");
+    cout << "[3]	作者" << endl; puts("");
+    cout << "[4]	价格" << endl; puts("");
+    cout << "[5]	出版商" << endl; puts("");
+    cout << "[6]	出版年份" << endl; puts("");
+    cout << "[7]    返回上一级功能" << endl; puts("");
+
     int method;     //按照不同的元素排序
-    bool order = 0; //0升序，1降序
-    if (!check(method))
-    {
+    if (!check(method)){
+        err();
         return;
     }
+    
+    cout << " 顺序选择：【0】升序， 【1】降序       ";
+    int order = 0; //0升序，1降序
+    if(!check(order)){
+        err();
+        return;
+    }
+    
     //冒泡排序………………
     books *pBooks1;
     books *pBooks2;
-    //核心的比较大小部分用switch语句
     bool b = 0; //b等于0就说明说明pBooks1<pBooks2,如果是降序则替换，升序就不动
     switch (method)
     {
-    case 1: //…………
-        if (1/*规则*/)
-        {
-            b = 0;
-        }
+    case 1:  
+        
+        break;
+    
+    case 2:  
+       break;
+    
+    case 3:  
+       break;
+    
+    case 4:  
+       break;
+
+    case 5:  
+       break;
+    
+    case 6:  
+       break;
+
+    case 7: //退出
+       break;
     }
-    //冒泡排序………………
 }
 
 void store()

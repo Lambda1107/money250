@@ -130,6 +130,10 @@ bool findSomething(T input, int way){
     {
         cout << "未查询到相关信息" << endl;
     }
-    
 }
 
+//链表的冒泡函数
+template<typename T>
+books* bobbleSort(){
+
+}
