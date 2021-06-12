@@ -1,24 +1,25 @@
 #pragma once
 #include <string>
 #include <iostream>
-#include "books.h"
+#include "Book.h"
 using namespace std;
 
-//鍏ㄥ眬瀹氫箟
+//全局定义
 #define QUIT 8
 #define ERR 10
 #define OK 11
-extern books *HEADP;
-//閾捐〃缁撴瀯澹版槑
-struct books
-{
+
+//链表结构声明
+struct books {
     Book data;
-    books *next;
+    books* next;
 };
 
-//鍏ㄥ眬鍑芥暟
+extern books* HEADP;
+
+//全局函数
 void err();
-bool check(int &pos);
+bool check(int& pos);
 void init();
 void printInterface();
 void listBooks();
@@ -28,3 +29,4 @@ void modifyBook();
 void findBook();
 void sortBook();
 void store();
+

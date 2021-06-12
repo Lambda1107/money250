@@ -1,15 +1,17 @@
 #pragma once
-//ç»„ä»¶åº“
+//×é¼ş¿â
 #include<iostream>
+#include"Book.h"
+#include"main.h"
 using namespace std;
 
-//å…¨å±€é”™è¯¯
+//È«¾Ö´íÎó
 void err()
 {
-    cout << "è¾“å…¥å†…å®¹æœ‰è¯¯ï¼è¯·æ£€æŸ¥è¾“å…¥ï¼" << endl;
+    cout << "ÊäÈëÄÚÈİÓĞÎó£¡Çë¼ì²éÊäÈë£¡" << endl;
 }
 
-//å„ç§è¾“å…¥æ£€æŸ¥
+//¸÷ÖÖÊäÈë¼ì²é
 template<typename T>
 bool check(T& pos)
 {
@@ -23,10 +25,10 @@ bool check(T& pos)
     return true;
 }
 
-//æ‰¾posä½ç½®
-bool findPos(int pos, books *pBooks){
-    for(int i=0;i<pos;i++){
-        if(!pBooks){
+//ÕÒposÎ»ÖÃ
+bool findPos(int pos, books* pBooks) {
+    for (int i = 0; i < pos; i++) {
+        if (!pBooks) {
             err();
             return false;
         }
@@ -35,91 +37,91 @@ bool findPos(int pos, books *pBooks){
     return true;
 }
 
-//ç”¨æˆ·è¾“å…¥å›¾ä¹¦ä¿¡æ¯
-bool inputBookInfo(books *tmpBooks){
-    cout << "å›¾ä¹¦ç¼–å·ï¼š ";
-    if (!check(tmpBooks->data.num)){
+//ÓÃ»§ÊäÈëÍ¼ÊéĞÅÏ¢
+bool inputBookInfo(books* tmpBooks) {
+    cout << "Í¼Êé±àºÅ£º ";
+    if (!check(tmpBooks->data.num)) {
         return false;
     }
-    if (!check(tmpBooks->data.name)){
+    if (!check(tmpBooks->data.name)) {
         return false;
     }
-    if (!check(tmpBooks->data.author)){
+    if (!check(tmpBooks->data.author)) {
         return false;
     }
-    if (!check(tmpBooks->data.price)){
+    if (!check(tmpBooks->data.price)) {
         return false;
     }
-    if (!check(tmpBooks->data.press)){
+    if (!check(tmpBooks->data.press)) {
         return false;
     }
-    if (!check(tmpBooks->data.pressYear)){
+    if (!check(tmpBooks->data.pressYear)) {
         return false;
     }
     return true;
 }
 
-//éå†é“¾è¡¨æŸ¥æ‰¾ä¿¡æ¯
+//±éÀúÁ´±í²éÕÒĞÅÏ¢
 template<typename T>
-bool findSomething(T input, int way){
+bool findSomething(T input, int way) {
     books* p = HEADP;
-    if (!p){
-        cout << "å›¾ä¹¦æ•°æ®ä¸ºç©º" << endl;
+    if (!p) {
+        cout << "Í¼ÊéÊı¾İÎª¿Õ" << endl;
     }
 
     bool if_find = false;
 
     switch (way)
     {
-    case 1: 
-        while (p){
-            if(p->data.num==input){
+    case 1:
+        while (p) {
+            if (p->data.num == input) {
                 p->data.printInformation();
                 if_find = true;
             }
         }
         break;
-    case 2: 
-        while (p){
-            if(strcmp(p->data.name,input)){
+    case 2:
+        while (p) {
+            if (strcmp(p->data.name, input)) {
                 p->data.printInformation();
                 if_find = true;
             }
         }
         break;
-    case 3: 
-        while (p){
-            if(strcmp(p->data.author,input)){
+    case 3:
+        while (p) {
+            if (strcmp(p->data.author, input)) {
                 p->data.printInformation();
                 if_find = true;
             }
         }
         break;
-    case 4: 
-        while (p){
-                if(p->data.price==input){
-                    p->data.printInformation();
-                    if_find = true;
-                }
-            }
-        break;
-    case 5: 
-        while (p){
-            if(strcmp(p->data.press,input)){
+    case 4:
+        while (p) {
+            if (p->data.price == input) {
                 p->data.printInformation();
                 if_find = true;
             }
         }
         break;
-    case 6: 
-        while (p){
-            if(p->data.pressYear==input){
+    case 5:
+        while (p) {
+            if (strcmp(p->data.press, input)) {
                 p->data.printInformation();
                 if_find = true;
             }
         }
         break;
-    case 7: 
+    case 6:
+        while (p) {
+            if (p->data.pressYear == input) {
+                p->data.printInformation();
+                if_find = true;
+            }
+        }
+        break;
+    case 7:
         break;
     default:
         err();
@@ -128,37 +130,37 @@ bool findSomething(T input, int way){
 
     if (!if_find)
     {
-        cout << "æœªæŸ¥è¯¢åˆ°ç›¸å…³ä¿¡æ¯" << endl;
+        cout << "Î´²éÑ¯µ½Ïà¹ØĞÅÏ¢" << endl;
     }
     return if_find;
 }
 
-//é“¾è¡¨çš„å†’æ³¡å‡½æ•°
-void bobbleSort(int way, int order){
-    if(HEADP == NULL || HEADP->next == NULL){
-        cout << "æ— éœ€è¦æ’åºçš„æ•°æ®" << endl;
+//Á´±íµÄÃ°Åİº¯Êı
+void bobbleSort(int way, int order) {
+    if (HEADP == NULL || HEADP->next == NULL) {
+        cout << "ÎŞĞèÒªÅÅĞòµÄÊı¾İ" << endl;
         return;
     }
-    books *p = NULL;
+    books* p = NULL;
     bool isChange = true;
 
     int op;
-    if(!(check(op))){
+    if (!(check(op))) {
         err();
         return;
     }
 
     switch (way)
     {
-    case 1: 
-        if(!order){//å‡åº
-            while(p != HEADP->next && isChange)
+    case 1:
+        if (!order) {//ÉıĞò
+            while (p != HEADP->next && isChange)
             {
-                books *q = HEADP;
-                isChange = false;//æ ‡å¿—å½“å‰è¿™ä¸€è½®ä¸­åˆæ²¡æœ‰å‘ç”Ÿå…ƒç´ äº¤æ¢ï¼Œå¦‚æœæ²¡æœ‰åˆ™è¡¨ç¤ºæ•°ç»„å·²ç»æœ‰åº
-                for(; q->next && q->next != p; q = q->next)
+                books* q = HEADP;
+                isChange = false;//±êÖ¾µ±Ç°ÕâÒ»ÂÖÖĞÓÖÃ»ÓĞ·¢ÉúÔªËØ½»»»£¬Èç¹ûÃ»ÓĞÔò±íÊ¾Êı×éÒÑ¾­ÓĞĞò
+                for (; q->next && q->next != p; q = q->next)
                 {
-                    if(q->data.num > q->next->data.num)
+                    if (q->data.num > q->next->data.num)
                     {
                         swap(q->data, q->next->data);
                         isChange = true;
@@ -167,14 +169,14 @@ void bobbleSort(int way, int order){
                 p = q;
             }
         }
-        else{//é™åº
-            while(p != HEADP->next && isChange)
+        else {//½µĞò
+            while (p != HEADP->next && isChange)
             {
-                books *q = HEADP;
-                isChange = false;//æ ‡å¿—å½“å‰è¿™ä¸€è½®ä¸­åˆæ²¡æœ‰å‘ç”Ÿå…ƒç´ äº¤æ¢ï¼Œå¦‚æœæ²¡æœ‰åˆ™è¡¨ç¤ºæ•°ç»„å·²ç»æœ‰åº
-                for(; q->next && q->next != p; q = q->next)
+                books* q = HEADP;
+                isChange = false;//±êÖ¾µ±Ç°ÕâÒ»ÂÖÖĞÓÖÃ»ÓĞ·¢ÉúÔªËØ½»»»£¬Èç¹ûÃ»ÓĞÔò±íÊ¾Êı×éÒÑ¾­ÓĞĞò
+                for (; q->next && q->next != p; q = q->next)
                 {
-                    if(q->data.num < q->next->data.num)
+                    if (q->data.num < q->next->data.num)
                     {
                         swap(q->data, q->next->data);
                         isChange = true;
@@ -183,23 +185,23 @@ void bobbleSort(int way, int order){
                 p = q;
             }
         }
-        break;//å‰©ä¸‹çš„æ’åºç­‰æµ‹è¿‡äº†ç›´æ¥ç²˜è´´å¾ˆå¿«çš„
-    case 2: 
-        
+        break;//Ê£ÏÂµÄÅÅĞòµÈ²â¹ıÁËÖ±½ÓÕ³ÌùºÜ¿ìµÄ
+    case 2:
+
         break;
-    case 3: 
-        
+    case 3:
+
         break;
-    case 4: 
-        
+    case 4:
+
         break;
-    case 5: 
-        
+    case 5:
+
         break;
-    case 6: 
-        
+    case 6:
+
         break;
-    case 7: 
+    case 7:
         break;
     default:
         err();
