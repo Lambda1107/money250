@@ -3,8 +3,10 @@
 #include "main.h"
 
 using namespace std;
+
 int main()
 {
+    HEADP = nullptr;
     int option = 0;
     init();
     do

@@ -1,6 +1,7 @@
 #include <fstream>
 #include "utils.h"
 #include "main.h"
+#include"Book.h"
 using namespace std;
 
 void init() //创建链表
@@ -140,9 +141,9 @@ void findBook()
     cout << "[7]    返回上一级功能" << endl; puts("");
     //判断输入
 
-    int input1;
+    int input1 = 0;
     char input2[50];
-    double input3;
+    double input3 = 0;
 
     int option = 0;
     do
@@ -160,42 +161,42 @@ void findBook()
                 err();
                 return;
             }
-            findSomething(input1, 1);
+            findSomething1(input1);
             break;
         case 2:
             if (!check(input2)) {
                 err();
                 return;
             }
-            findSomething(input2, 2);
+            findSomething2(input2);
             break;
         case 3:
             if (!check(input2)) {
                 err();
                 return;
             }
-            findSomething(input2, 3);
+            findSomething3(input2);
             break;
         case 4:
             if (!check(input3)) {
                 err();
                 return;
             }
-            findSomething(input3, 4);
+            findSomething4(input3);
             break;
         case 5:
             if (!check(input2)) {
                 err();
                 return;
             }
-            findSomething(input2, 5);
+            findSomething5(input2);
             break;
         case 6:
             if (!check(input1)) {
                 err();
                 return;
             }
-            findSomething(input1, 6);
+            findSomething6(input1);
             break;
         case 7:
             option = QUIT;

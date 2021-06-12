@@ -3,6 +3,7 @@
 #include<iostream>
 #include"Book.h"
 #include"main.h"
+#include<string.h>
 using namespace std;
 
 //全局错误
@@ -13,7 +14,7 @@ void err()
 
 //各种输入检查
 template<typename T>
-bool check(T& pos)
+bool check(T pos)
 {
     if (!(cin >> pos))
     {
@@ -62,70 +63,125 @@ bool inputBookInfo(books* tmpBooks) {
 }
 
 //遍历链表查找信息
-template<typename T>
-bool findSomething(T input, int way) {
+bool findSomething1(int input) 
+{
     books* p = HEADP;
     if (!p) {
         cout << "图书数据为空" << endl;
     }
 
     bool if_find = false;
+    while (p) {
+        if (p->data.num == input) {
+            p->data.printInformation();
+            if_find = true;
+        }
+    }
 
-    switch (way)
+    if (!if_find)
     {
-    case 1:
-        while (p) {
-            if (p->data.num == input) {
-                p->data.printInformation();
-                if_find = true;
-            }
+        cout << "未查询到相关信息" << endl;
+    }
+    return if_find;
+}
+
+bool findSomething2(char input[50])
+{
+    books* p = HEADP;
+    if (!p) {
+        cout << "图书数据为空" << endl;
+    }
+
+    bool if_find = false;
+    while (p) {
+        if (strcmp(p->data.name, input)) {
+            p->data.printInformation();
+            if_find = true;
         }
-        break;
-    case 2:
-        while (p) {
-            if (strcmp(p->data.name, input)) {
-                p->data.printInformation();
-                if_find = true;
-            }
+
+        if (!if_find)
+        {
+            cout << "未查询到相关信息" << endl;
         }
-        break;
-    case 3:
-        while (p) {
-            if (strcmp(p->data.author, input)) {
-                p->data.printInformation();
-                if_find = true;
-            }
+        return if_find;
+    }
+}
+
+bool findSomething3(char input[50]) 
+{
+    books* p = HEADP;
+    if (!p) {
+        cout << "图书数据为空" << endl;
+    }
+
+    bool if_find = false;
+    while (p) {
+        if (strcmp(p->data.author, input)) {
+            p->data.printInformation();
+            if_find = true;
         }
-        break;
-    case 4:
-        while (p) {
-            if (p->data.price == input) {
-                p->data.printInformation();
-                if_find = true;
-            }
+    }
+
+    if (!if_find)
+    {
+        cout << "未查询到相关信息" << endl;
+    }
+    return if_find;
+}
+
+bool findSomething4(double input) {
+    books* p = HEADP;
+    if (!p) {
+        cout << "图书数据为空" << endl;
+    }
+
+    bool if_find = false;
+    while (p) {
+        if (p->data.price == input) {
+            p->data.printInformation();
+            if_find = true;
         }
-        break;
-    case 5:
-        while (p) {
-            if (strcmp(p->data.press, input)) {
-                p->data.printInformation();
-                if_find = true;
-            }
+    }
+
+    if (!if_find)
+    {
+        cout << "未查询到相关信息" << endl;
+    }
+    return if_find;
+}
+
+bool findSomething5(char input[50]) {
+    books* p = HEADP;
+    if (!p) {
+        cout << "图书数据为空" << endl;
+    }
+
+    bool if_find = false;
+    while (p) {
+        if (strcmp(p->data.press, input)) {
+            p->data.printInformation();
+            if_find = true;
         }
-        break;
-    case 6:
-        while (p) {
-            if (p->data.pressYear == input) {
-                p->data.printInformation();
-                if_find = true;
-            }
+    }
+
+    if (!if_find)
+    {
+        cout << "未查询到相关信息" << endl;
+    }
+    return if_find;
+}
+bool findSomething6(int input) {
+    books* p = HEADP;
+    if (!p) {
+        cout << "图书数据为空" << endl;
+    }
+
+    bool if_find = false;
+    while (p) {
+        if (p->data.pressYear == input) {
+            p->data.printInformation();
+            if_find = true;
         }
-        break;
-    case 7:
-        break;
-    default:
-        err();
-        break;
     }
 
     if (!if_find)

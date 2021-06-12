@@ -10,7 +10,7 @@ public:
     char press[50];
     int pressYear;
 
-    char* returnInformation(); //返回格式化好的char*
+    //char* returnInformation(); //返回格式化好的char*
     void printInformation(); //打印格式化好的char*
 
     Book(/* args */);
