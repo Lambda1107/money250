@@ -38,3 +38,4 @@ config.yaml
 **/*.log
 .vscode/tasks.json
 .vscode/launch.json
+database
