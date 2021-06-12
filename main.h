@@ -19,7 +19,7 @@ extern books* HEADP;
 
 //È«¾Öº¯Êý
 void err();
-bool check(int& pos);
+
 void init();
 void printInterface();
 void listBooks();

@@ -105,6 +105,7 @@ bool findSomething2(char input[50])
         }
         return if_find;
     }
+    return if_find;
 }
 
 bool findSomething3(char input[50]) 
