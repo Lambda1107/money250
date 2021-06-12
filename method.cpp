@@ -1,22 +1,24 @@
 #include <fstream>
 #include "utils.h"
 #include "main.h"
-#include"Book.h"
+#include "Book.h"
 using namespace std;
 
-void init() //¥¥Ω®¡¥±Ì
+void init() //ÂàõÂª∫ÈìæË°®
 {
     fstream fin("database", ios::binary | ios::in);
+    if (!fin)
+        return;
     HEADP = new books;
-    books* pbooks = HEADP;
-    books* pbooks1 = pbooks;
+    books *pbooks = HEADP;
+    books *pbooks1 = pbooks;
     while (!fin.eof())
     {
         pbooks1 = pbooks;
-        fin.read((char*)(&pbooks->data), sizeof(Book));
+        fin.read((char *)(&pbooks->data), sizeof(Book));
         pbooks->next = new books;
         pbooks = pbooks->next;
-    } //∂¡µΩŒƒº˛Œ≤¡ÀæÕÕÀ≥ˆ
+    } //ËØªÂà∞Êñá‰ª∂Â∞æ‰∫ÜÂ∞±ÈÄÄÂá∫
     delete pbooks;
     pbooks1->next = NULL;
     fin.close();
@@ -25,24 +27,35 @@ void init() //¥¥Ω®¡¥±Ì
 void printInterface()
 {
     system("cls");
-    cout << "         Õº Èπ‹¿Ì" << endl; puts("");
-    cout << "[1]    œ‘ æÕº È ˝æ›" << endl; puts("");
-    cout << "[2]	≤Â»ÎÕº È ˝æ›" << endl; puts("");
-    cout << "[3]	…æ≥˝Õº È ˝æ›" << endl; puts("");
-    cout << "[4]	–ﬁ∏ƒÕº È ˝æ›" << endl; puts("");
-    cout << "[5]	 ˝æ›≤È—Ø" << endl; puts("");
-    cout << "[6]	 ˝æ›≈≈–Ú" << endl; puts("");
-    cout << "[7]    ÕÀ≥ˆ≥Ã–Ú" << endl; puts("");
+    cout << "         Âõæ‰π¶ÁÆ°ÁêÜ" << endl;
+    puts("");
+    cout << "[1]    ÊòæÁ§∫Âõæ‰π¶Êï∞ÊçÆ" << endl;
+    puts("");
+    cout << "[2]	ÊèíÂÖ•Âõæ‰π¶Êï∞ÊçÆ" << endl;
+    puts("");
+    cout << "[3]	Âà†Èô§Âõæ‰π¶Êï∞ÊçÆ" << endl;
+    puts("");
+    cout << "[4]	‰øÆÊîπÂõæ‰π¶Êï∞ÊçÆ" << endl;
+    puts("");
+    cout << "[5]	Êï∞ÊçÆÊü•ËØ¢" << endl;
+    puts("");
+    cout << "[6]	Êï∞ÊçÆÊéíÂ∫è" << endl;
+    puts("");
+    cout << "[7]    ÈÄÄÂá∫Á®ãÂ∫è" << endl;
+    puts("");
 }
 
-void listBooks() {
-    //±È¿˙¡¥±Ì¥Ú”°–≈œ¢
-    books* p = HEADP;
-    if (!p) {
-        cout << "Õº È ˝æ›Œ™ø’" << endl;
+void listBooks()
+{
+    //ÈÅçÂéÜÈìæË°®ÊâìÂç∞‰ø°ÊÅØ
+    books *p = HEADP;
+    if (!p)
+    {
+        cout << "Âõæ‰π¶Êï∞ÊçÆ‰∏∫Á©∫" << endl;
     }
 
-    while (p) {
+    while (p)
+    {
         p->data.printInformation();
     }
 }
@@ -50,21 +63,23 @@ void listBooks() {
 void insertBook()
 {
     int pos;
-    cout << "«Î ‰»Î“™≤Â»ÎµΩµƒŒª÷√£∫ ";
-    if (!check(pos)) {
+    cout << "ËØ∑ËæìÂÖ•Ë¶ÅÊèíÂÖ•Âà∞ÁöÑ‰ΩçÁΩÆÔºö ";
+    if (!check(pos))
+    {
         err();
         return;
     }
 
-    books* dummuHead = new books;
+    books *dummuHead = new books;
     dummuHead->next = HEADP;
-    books* pBooks = dummuHead;
+    books *pBooks = dummuHead;
 
-    if (!findPos(pos, pBooks)) {
+    if (!findPos(pos, pBooks))
+    {
         return;
     }
 
-    books* tmpBooks = new books;
+    books *tmpBooks = new books;
     inputBookInfo(tmpBooks);
 
     tmpBooks->next = pBooks->next;
@@ -77,27 +92,30 @@ void insertBook()
 void deleteBook()
 {
     int pos;
-    cout << "«Î ‰»Î“™…æ≥˝µƒŒª÷√£∫ ";
-    if (!check(pos)) {
+    cout << "ËØ∑ËæìÂÖ•Ë¶ÅÂà†Èô§ÁöÑ‰ΩçÁΩÆÔºö ";
+    if (!check(pos))
+    {
         err();
         return;
     }
 
-    books* dummuHead = new books;
+    books *dummuHead = new books;
     dummuHead->next = HEADP;
-    books* pBooks = dummuHead;
+    books *pBooks = dummuHead;
 
-    if (!findPos(pos - 1, pBooks)) {
-        //’““™…æ≥˝∂‘œÛµƒ«∞“ª∏ˆΩ·µ„
+    if (!findPos(pos - 1, pBooks))
+    {
+        //ÊâæË¶ÅÂà†Èô§ÂØπË±°ÁöÑÂâç‰∏Ä‰∏™ÁªìÁÇπ
         return;
     }
 
-    if (!pBooks->next) {
+    if (!pBooks->next)
+    {
         err();
         return;
     }
 
-    books* ptmp = pBooks->next;
+    books *ptmp = pBooks->next;
     pBooks->next = pBooks->next->next;
     delete ptmp;
 
@@ -108,17 +126,19 @@ void deleteBook()
 void modifyBook()
 {
     int pos;
-    cout << "«Î ‰»Î“™–ﬁ∏ƒµƒŒª÷√£∫ ";
-    if (!check(pos)) {
+    cout << "ËØ∑ËæìÂÖ•Ë¶Å‰øÆÊîπÁöÑ‰ΩçÁΩÆÔºö ";
+    if (!check(pos))
+    {
         err();
         return;
     }
 
-    books* dummuHead = new books;
+    books *dummuHead = new books;
     dummuHead->next = HEADP;
-    books* pBooks = dummuHead;
+    books *pBooks = dummuHead;
 
-    if (!findPos(pos, pBooks)) {
+    if (!findPos(pos, pBooks))
+    {
         return;
     }
 
@@ -130,16 +150,24 @@ void modifyBook()
 
 void findBook()
 {
-    // ‰≥ˆÃ· æ
-    cout << "         Õº È≤È—Ø∑Ω Ω" << endl; puts("");
-    cout << "[1]    Õº È±‡∫≈" << endl; puts("");
-    cout << "[2]	 È√˚" << endl; puts("");
-    cout << "[3]	◊˜’ﬂ" << endl; puts("");
-    cout << "[4]	º€∏Ò" << endl; puts("");
-    cout << "[5]	≥ˆ∞Ê…Ã" << endl; puts("");
-    cout << "[6]	≥ˆ∞ÊƒÍ∑›" << endl; puts("");
-    cout << "[7]    ∑µªÿ…œ“ªº∂π¶ƒ‹" << endl; puts("");
-    //≈–∂œ ‰»Î
+    //ËæìÂá∫ÊèêÁ§∫
+    cout << "         Âõæ‰π¶Êü•ËØ¢ÊñπÂºè" << endl;
+    puts("");
+    cout << "[1]    Âõæ‰π¶ÁºñÂè∑" << endl;
+    puts("");
+    cout << "[2]	‰π¶Âêç" << endl;
+    puts("");
+    cout << "[3]	‰ΩúËÄÖ" << endl;
+    puts("");
+    cout << "[4]	‰ª∑Ê†º" << endl;
+    puts("");
+    cout << "[5]	Âá∫ÁâàÂïÜ" << endl;
+    puts("");
+    cout << "[6]	Âá∫ÁâàÂπ¥‰ªΩ" << endl;
+    puts("");
+    cout << "[7]    ËøîÂõû‰∏ä‰∏ÄÁ∫ßÂäüËÉΩ" << endl;
+    puts("");
+    //Âà§Êñ≠ËæìÂÖ•
 
     int input1 = 0;
     char input2[50];
@@ -149,7 +177,7 @@ void findBook()
     do
     {
         printInterface();
-        if (!check(option) /*ªÚ’ﬂoption≥¨≥ˆ∑∂Œß*/)
+        if (!check(option) /*ÊàñËÄÖoptionË∂ÖÂá∫ËåÉÂõ¥*/)
         {
             err();
             option = QUIT;
@@ -157,42 +185,48 @@ void findBook()
         switch (option)
         {
         case 1:
-            if (!check(input1)) {
+            if (!check(input1))
+            {
                 err();
                 return;
             }
             findSomething1(input1);
             break;
         case 2:
-            if (!check(input2)) {
+            if (!check(input2))
+            {
                 err();
                 return;
             }
             findSomething2(input2);
             break;
         case 3:
-            if (!check(input2)) {
+            if (!check(input2))
+            {
                 err();
                 return;
             }
             findSomething3(input2);
             break;
         case 4:
-            if (!check(input3)) {
+            if (!check(input3))
+            {
                 err();
                 return;
             }
             findSomething4(input3);
             break;
         case 5:
-            if (!check(input2)) {
+            if (!check(input2))
+            {
                 err();
                 return;
             }
             findSomething5(input2);
             break;
         case 6:
-            if (!check(input1)) {
+            if (!check(input1))
+            {
                 err();
                 return;
             }
@@ -209,34 +243,323 @@ void findBook()
     } while (option != QUIT);
 }
 
+bool inputBookInfo(books *tmpBooks)
+{
+    cout << "Âõæ‰π¶ÁºñÂè∑Ôºö ";
+    if (!check(tmpBooks->data.num))
+    {
+        return false;
+    }
+    if (!check(tmpBooks->data.name))
+    {
+        return false;
+    }
+    if (!check(tmpBooks->data.author))
+    {
+        return false;
+    }
+    if (!check(tmpBooks->data.price))
+    {
+        return false;
+    }
+    if (!check(tmpBooks->data.press))
+    {
+        return false;
+    }
+    if (!check(tmpBooks->data.pressYear))
+    {
+        return false;
+    }
+    return true;
+}
+
+void err()
+{
+    cout << "ËæìÂÖ•ÂÜÖÂÆπÊúâËØØÔºÅËØ∑Ê£ÄÊü•ËæìÂÖ•ÔºÅ" << endl;
+}
+
+bool findPos(int pos, books *pBooks)
+{
+    for (int i = 0; i < pos; i++)
+    {
+        if (!pBooks)
+        {
+            err();
+            return false;
+        }
+        pBooks = pBooks->next;
+    }
+    return true;
+}
+
+bool findSomething1(int input)
+{
+    books *p = HEADP;
+    if (!p)
+    {
+        cout << "Âõæ‰π¶Êï∞ÊçÆ‰∏∫Á©∫" << endl;
+    }
+
+    bool if_find = false;
+    while (p)
+    {
+        if (p->data.num == input)
+        {
+            p->data.printInformation();
+            if_find = true;
+        }
+    }
+
+    if (!if_find)
+    {
+        cout << "Êú™Êü•ËØ¢Âà∞Áõ∏ÂÖ≥‰ø°ÊÅØ" << endl;
+    }
+    return if_find;
+}
+
+bool findSomething2(char input[50])
+{
+    books *p = HEADP;
+    if (!p)
+    {
+        cout << "Âõæ‰π¶Êï∞ÊçÆ‰∏∫Á©∫" << endl;
+    }
+
+    bool if_find = false;
+    while (p)
+    {
+        if (strcmp(p->data.name, input))
+        {
+            p->data.printInformation();
+            if_find = true;
+        }
+
+        if (!if_find)
+        {
+            cout << "Êú™Êü•ËØ¢Âà∞Áõ∏ÂÖ≥‰ø°ÊÅØ" << endl;
+        }
+        return if_find;
+    }
+    return if_find;
+}
+
+bool findSomething3(char input[50])
+{
+    books *p = HEADP;
+    if (!p)
+    {
+        cout << "Âõæ‰π¶Êï∞ÊçÆ‰∏∫Á©∫" << endl;
+    }
+
+    bool if_find = false;
+    while (p)
+    {
+        if (strcmp(p->data.author, input))
+        {
+            p->data.printInformation();
+            if_find = true;
+        }
+    }
+
+    if (!if_find)
+    {
+        cout << "Êú™Êü•ËØ¢Âà∞Áõ∏ÂÖ≥‰ø°ÊÅØ" << endl;
+    }
+    return if_find;
+}
+
+bool findSomething4(double input)
+{
+    books *p = HEADP;
+    if (!p)
+    {
+        cout << "Âõæ‰π¶Êï∞ÊçÆ‰∏∫Á©∫" << endl;
+    }
+
+    bool if_find = false;
+    while (p)
+    {
+        if (p->data.price == input)
+        {
+            p->data.printInformation();
+            if_find = true;
+        }
+    }
+
+    if (!if_find)
+    {
+        cout << "Êú™Êü•ËØ¢Âà∞Áõ∏ÂÖ≥‰ø°ÊÅØ" << endl;
+    }
+    return if_find;
+}
+
+bool findSomething5(char input[50])
+{
+    books *p = HEADP;
+    if (!p)
+    {
+        cout << "Âõæ‰π¶Êï∞ÊçÆ‰∏∫Á©∫" << endl;
+    }
+
+    bool if_find = false;
+    while (p)
+    {
+        if (strcmp(p->data.press, input))
+        {
+            p->data.printInformation();
+            if_find = true;
+        }
+    }
+
+    if (!if_find)
+    {
+        cout << "Êú™Êü•ËØ¢Âà∞Áõ∏ÂÖ≥‰ø°ÊÅØ" << endl;
+    }
+    return if_find;
+}
+
+bool findSomething6(int input)
+{
+    books *p = HEADP;
+    if (!p)
+    {
+        cout << "Âõæ‰π¶Êï∞ÊçÆ‰∏∫Á©∫" << endl;
+    }
+
+    bool if_find = false;
+    while (p)
+    {
+        if (p->data.pressYear == input)
+        {
+            p->data.printInformation();
+            if_find = true;
+        }
+    }
+
+    if (!if_find)
+    {
+        cout << "Êú™Êü•ËØ¢Âà∞Áõ∏ÂÖ≥‰ø°ÊÅØ" << endl;
+    }
+    return if_find;
+}
+
+void bobbleSort(int way, int order)
+{
+    if (HEADP == NULL || HEADP->next == NULL)
+    {
+        cout << "Êó†ÈúÄË¶ÅÊéíÂ∫èÁöÑÊï∞ÊçÆ" << endl;
+        return;
+    }
+    books *p = NULL;
+    bool isChange = true;
+
+    int op;
+    if (!(check(op)))
+    {
+        err();
+        return;
+    }
+
+    switch (way)
+    {
+    case 1:
+        if (!order)
+        { //ÂçáÂ∫è
+            while (p != HEADP->next && isChange)
+            {
+                books *q = HEADP;
+                isChange = false; //Ê†áÂøóÂΩìÂâçËøô‰∏ÄËΩÆ‰∏≠ÂèàÊ≤°ÊúâÂèëÁîüÂÖÉÁ¥†‰∫§Êç¢ÔºåÂ¶ÇÊûúÊ≤°ÊúâÂàôË°®Á§∫Êï∞ÁªÑÂ∑≤ÁªèÊúâÂ∫è
+                for (; q->next && q->next != p; q = q->next)
+                {
+                    if (q->data.num > q->next->data.num)
+                    {
+                        swap(q->data, q->next->data);
+                        isChange = true;
+                    }
+                }
+                p = q;
+            }
+        }
+        else
+        { //ÈôçÂ∫è
+            while (p != HEADP->next && isChange)
+            {
+                books *q = HEADP;
+                isChange = false; //Ê†áÂøóÂΩìÂâçËøô‰∏ÄËΩÆ‰∏≠ÂèàÊ≤°ÊúâÂèëÁîüÂÖÉÁ¥†‰∫§Êç¢ÔºåÂ¶ÇÊûúÊ≤°ÊúâÂàôË°®Á§∫Êï∞ÁªÑÂ∑≤ÁªèÊúâÂ∫è
+                for (; q->next && q->next != p; q = q->next)
+                {
+                    if (q->data.num < q->next->data.num)
+                    {
+                        swap(q->data, q->next->data);
+                        isChange = true;
+                    }
+                }
+                p = q;
+            }
+        }
+        break; //Ââ©‰∏ãÁöÑÊéíÂ∫èÁ≠âÊµãËøá‰∫ÜÁõ¥Êé•Á≤òË¥¥ÂæàÂø´ÁöÑ
+    case 2:
+
+        break;
+    case 3:
+
+        break;
+    case 4:
+
+        break;
+    case 5:
+
+        break;
+    case 6:
+
+        break;
+    case 7:
+        break;
+    default:
+        err();
+        break;
+    }
+    return;
+}
+
 void sortBook()
 {
-    // ‰≥ˆÃ· æ
-    cout << "         ≈≈–Ú∑Ω Ω" << endl; puts("");
-    cout << "[1]    Õº È±‡∫≈" << endl; puts("");
-    cout << "[2]	 È√˚" << endl; puts("");
-    cout << "[3]	◊˜’ﬂ" << endl; puts("");
-    cout << "[4]	º€∏Ò" << endl; puts("");
-    cout << "[5]	≥ˆ∞Ê…Ã" << endl; puts("");
-    cout << "[6]	≥ˆ∞ÊƒÍ∑›" << endl; puts("");
-    cout << "[7]    ∑µªÿ…œ“ªº∂π¶ƒ‹" << endl; puts("");
+    //ËæìÂá∫ÊèêÁ§∫
+    cout << "         ÊéíÂ∫èÊñπÂºè" << endl;
+    puts("");
+    cout << "[1]    Âõæ‰π¶ÁºñÂè∑" << endl;
+    puts("");
+    cout << "[2]	‰π¶Âêç" << endl;
+    puts("");
+    cout << "[3]	‰ΩúËÄÖ" << endl;
+    puts("");
+    cout << "[4]	‰ª∑Ê†º" << endl;
+    puts("");
+    cout << "[5]	Âá∫ÁâàÂïÜ" << endl;
+    puts("");
+    cout << "[6]	Âá∫ÁâàÂπ¥‰ªΩ" << endl;
+    puts("");
+    cout << "[7]    ËøîÂõû‰∏ä‰∏ÄÁ∫ßÂäüËÉΩ" << endl;
+    puts("");
 
-    int method;     //∞¥’’≤ªÕ¨µƒ‘™Àÿ≈≈–Ú
-    if (!check(method)) {
+    int method; //ÊåâÁÖß‰∏çÂêåÁöÑÂÖÉÁ¥†ÊéíÂ∫è
+    if (!check(method))
+    {
         err();
         return;
     }
 
-    cout << " À≥–Ú—°‘Ò£∫°æ0°ø…˝–Ú£¨ °æ1°øΩµ–Ú       ";
-    int order = 0; //0…˝–Ú£¨1Ωµ–Ú
-    if (!check(order)) {
+    cout << " È°∫Â∫èÈÄâÊã©Ôºö„Äê0„ÄëÂçáÂ∫èÔºå „Äê1„ÄëÈôçÂ∫è       ";
+    int order = 0; //0ÂçáÂ∫èÔºå1ÈôçÂ∫è
+    if (!check(order))
+    {
         err();
         return;
     }
 
-    //√∞≈›≈≈–Ú°≠°≠°≠°≠°≠°≠
-    books* pBooks1;
-    books* pBooks2;
+    //ÂÜíÊ≥°ÊéíÂ∫è‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶‚Ä¶
+    books *pBooks1;
+    books *pBooks2;
     switch (method)
     {
     case 1:
@@ -258,18 +581,19 @@ void sortBook()
     case 6:
         break;
 
-    case 7: //ÕÀ≥ˆ
+    case 7: //ÈÄÄÂá∫
         break;
     }
 }
 
 void store()
 {
-    //∏˙load“ª—˘µƒ£¨∂˛Ω¯÷∆¥Ê∑®
+    //Ë∑üload‰∏ÄÊ†∑ÁöÑÔºå‰∫åËøõÂà∂Â≠òÊ≥ï
     fstream fout("database", ios::binary | ios::out);
-    books* pbooks = HEADP;
-    while (pbooks) {
-        fout.write((char*)(&pbooks->data), sizeof(Book));
+    books *pbooks = HEADP;
+    while (pbooks)
+    {
+        fout.write((char *)(&pbooks->data), sizeof(Book));
         pbooks = pbooks->next;
     }
     delete pbooks;

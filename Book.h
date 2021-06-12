@@ -2,7 +2,7 @@
 
 class Book {
 public:
-    //Í¼Êé±àºÅ¡¢ÊéÃû¡¢×÷Õß¡¢¼Û¸ñ¡¢³ö°æÉç¡¢³ö°æÄê·İ
+    //å›¾ä¹¦ç¼–å·ã€ä¹¦åã€ä½œè€…ã€ä»·æ ¼ã€å‡ºç‰ˆç¤¾ã€å‡ºç‰ˆå¹´ä»½
     int num;
     char name[50];
     char author[50];
@@ -10,8 +10,8 @@ public:
     char press[50];
     int pressYear;
 
-    //char* returnInformation(); //·µ»Ø¸ñÊ½»¯ºÃµÄchar*
-    void printInformation(); //´òÓ¡¸ñÊ½»¯ºÃµÄchar*
+    //char* returnInformation(); //è¿”å›æ ¼å¼åŒ–å¥½çš„char*
+    void printInformation(); //æ‰“å°æ ¼å¼åŒ–å¥½çš„char*
 
     Book(/* args */);
     Book(int _num, char _name[50], char _author[50], double _price, char _press[50], int _pressYear);

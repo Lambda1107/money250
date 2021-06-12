@@ -4,12 +4,12 @@
 #include "Book.h"
 using namespace std;
 
-//全局定义
+//鍏ㄥ眬瀹氫箟
 #define QUIT 8
 #define ERR 10
 #define OK 11
 
-//链表结构声明
+//閾捐〃缁撴瀯澹版槑
 struct books {
     Book data;
     books* next;
@@ -17,7 +17,7 @@ struct books {
 
 extern books* HEADP;
 
-//全局函数
+//鍏ㄥ眬鍑芥暟
 void err();
 
 void init();

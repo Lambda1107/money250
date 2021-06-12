@@ -5,6 +5,8 @@
 
 using namespace std;
 
+books *HEADP = NULL;
+
 int main()
 {
     HEADP = nullptr;
@@ -13,35 +15,35 @@ int main()
     do
     {
         printInterface();
-        if (!check(option) /*»òÕßoption³¬³ö·¶Î§*/)
+        if (!check(option) /*æˆ–è€…optionè¶…å‡ºèŒƒå›´*/)
         {
             err();
             continue;
         }
         switch (option)
         {
-        case 1: //ÏÔÊ¾Í¼ÊéÊı¾İ
+        case 1: //æ˜¾ç¤ºå›¾ä¹¦æ•°æ®
             listBooks();
             break;
-        case 2: //²åÈëÍ¼ÊéÊı¾İ
+        case 2: //æ’å…¥å›¾ä¹¦æ•°æ®
             insertBook();
             break;
-        case 3: //É¾³ıÍ¼ÊéÊı¾İ
+        case 3: //åˆ é™¤å›¾ä¹¦æ•°æ®
             deleteBook();
             break;
-        case 4: //ĞŞ¸ÄÍ¼ÊéÊı¾İ
+        case 4: //ä¿®æ”¹å›¾ä¹¦æ•°æ®
             modifyBook();
             break;
-        case 5: //Êı¾İ²éÑ¯
+        case 5: //æ•°æ®æŸ¥è¯¢
             findBook();
             break;
-        case 6: //Êı¾İÅÅĞò
+        case 6: //æ•°æ®æ’åº
             sortBook();
             break;
-        case 7: //Êı¾İ±£´æ
+        case 7: //æ•°æ®ä¿å­˜
             store();
             break;
-        case 8: //ÍË³ö
+        case 8: //é€€å‡º
             store();
             break;
         default:
@@ -50,5 +52,5 @@ int main()
         }
     } while (option != QUIT);
     store();
-    cout << "¸ĞĞ»Ê¹ÓÃ" << endl;
+    cout << "æ„Ÿè°¢ä½¿ç”¨" << endl;
 }
