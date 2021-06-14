@@ -25,7 +25,7 @@ void init() //创建链表
 
 void printInterface()
 {
-    system("cls");
+    system("clear");
     cout << "         图书管理" << endl;
     puts("");
     cout << "[1]    显示图书数据" << endl;
@@ -249,22 +249,27 @@ bool inputBookInfo(books *tmpBooks)
     {
         return false;
     }
+    cout << "图书名称： ";
     if (!check(tmpBooks->data.name))
     {
         return false;
     }
+    cout << "作者： ";
     if (!check(tmpBooks->data.author))
     {
         return false;
     }
+    cout << "价格： ";
     if (!check(tmpBooks->data.price))
     {
         return false;
     }
+    cout << "出版社： ";
     if (!check(tmpBooks->data.press))
     {
         return false;
     }
+    cout << "出版年份： ";
     if (!check(tmpBooks->data.pressYear))
     {
         return false;
