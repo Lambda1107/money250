@@ -23,10 +23,6 @@ Book::~Book()
 {
 }
 
-//char* Book::returnInformation() {
-//
-//}
-
 void Book::printInformation()
 {
     cout << setw(10) << num

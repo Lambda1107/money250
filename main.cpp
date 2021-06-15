@@ -1,49 +1,46 @@
 #include <iostream>
 #include "Book.h"
-#include "main.h"
+#include "method.h"
 
 using namespace std;
 
-books *HEADP = NULL;
-
 int main()
 {
-    HEADP = nullptr;
     int option = 0;
     init();
+    printInterface();
     do
     {
-        printInterface();
-        if (!check(option) /*æˆ–è€…optionè¶…å‡ºèŒƒå›´*/)
+        cout << "ÇëÑ¡Ôñ²Ù×÷£º ";
+        if (!check(option) /*»òÕßoption³¬³ö·¶Î§*/)
         {
-            err();
             continue;
         }
+        
         switch (option)
         {
-        case 1: //æ˜¾ç¤ºå›¾ä¹¦æ•°æ®
+        case 1: //ÏÔÊ¾Í¼ÊéÊý¾Ý
             listBooks();
             break;
-        case 2: //æ’å…¥å›¾ä¹¦æ•°æ®
+        case 2: //²åÈëÍ¼ÊéÊý¾Ý
             insertBook();
             break;
-        case 3: //åˆ é™¤å›¾ä¹¦æ•°æ®
+        case 3: //É¾³ýÍ¼ÊéÊý¾Ý
             deleteBook();
             break;
-        case 4: //ä¿®æ”¹å›¾ä¹¦æ•°æ®
+        case 4: //ÐÞ¸ÄÍ¼ÊéÊý¾Ý
             modifyBook();
             break;
-        case 5: //æ•°æ®æŸ¥è¯¢
+        case 5: //Êý¾Ý²éÑ¯
             findBook();
             break;
-        case 6: //æ•°æ®æŽ’åº
+        case 6: //Êý¾ÝÅÅÐò
             sortBook();
             break;
-        case 7: //æ•°æ®ä¿å­˜
+        case 7: //Êý¾Ý±£´æ
             store();
             break;
-        case 8: //é€€å‡º
-            store();
+        case 8: //ÍË³ö
             break;
         default:
             err();
@@ -51,5 +48,5 @@ int main()
         }
     } while (option != QUIT);
     store();
-    cout << "æ„Ÿè°¢ä½¿ç”¨" << endl;
+    cout << "¸ÐÐ»Ê¹ÓÃ" << endl;
 }
