@@ -1,19 +1,16 @@
 //小组件
-#include<iostream>
-#include<fstream>
-#include"utils.h"
-#include<cstring>
-#include<stdlib.h>
-#include<iomanip>
-#include"Book.h"
-#include"method.h"
+#include <iostream>
+#include <fstream>
+#include "utils.h"
+#include <cstring>
+#include <stdlib.h>
+#include <iomanip>
+#include "Book.h"
 using namespace std;
-
-books *HEADP = nullptr;
 
 void init() //创建链表,从二进制文件中读入
 {
-    HEADP = nullptr;//没数据的话在下面return是个空指针
+    HEADP = nullptr; //没数据的话在下面return是个空指针
     fstream fin("database.dat", ios::binary | ios::in);
     if (!fin)
         return;
@@ -60,7 +57,7 @@ void err()
     cout << "输入内容有误！请检查输入！" << endl;
 }
 
-bool findPos(int pos, books* &pBooks)
+bool findPos(int pos, books *&pBooks)
 {
     for (int i = 0; i < pos; i++)
     {
@@ -69,7 +66,7 @@ bool findPos(int pos, books* &pBooks)
             err();
             return false;
         }
-        cout << "go next" << endl;//方便dbug
+        //cout << "go next" << endl; //方便dbug
         pBooks = pBooks->next;
     }
     return true;
@@ -86,15 +83,16 @@ void findSomething(char input[50], int way)
     bool if_find = false;
     while (p)
     {
-        if (strcmp(p->data.info[way], input)==0)
+        if (strcmp(p->data.info[way], input) == 0)
         {
-            if(!if_find){
+            if (!if_find)
+            {
                 cout << setw(10) << "书籍编号"
-                << setw(10) << "书名"
-                << setw(10) << "作者"
-                << setw(10) << "价格"
-                << setw(10) << "出版社"
-                << setw(10) << "出版年份" << endl;
+                     << setw(10) << "书名"
+                     << setw(10) << "作者"
+                     << setw(10) << "价格"
+                     << setw(10) << "出版社"
+                     << setw(10) << "出版年份" << endl;
             }
             p->data.printInformation();
             if_find = true;
@@ -141,12 +139,12 @@ bool inputBookInfo(books *tmpBooks)
         return false;
     }
 
-    sprintf(tmpBooks->data.info[0],"%d",tmpBooks->data.num);
+    sprintf(tmpBooks->data.info[0], "%d", tmpBooks->data.num);
     strcpy(tmpBooks->data.info[1], tmpBooks->data.name);
     strcpy(tmpBooks->data.info[2], tmpBooks->data.author);
-    sprintf(tmpBooks->data.info[3],"%lf",tmpBooks->data.price);
+    sprintf(tmpBooks->data.info[3], "%lf", tmpBooks->data.price);
     strcpy(tmpBooks->data.info[4], tmpBooks->data.press);
-    sprintf(tmpBooks->data.info[5],"%d",tmpBooks->data.pressYear);
+    sprintf(tmpBooks->data.info[5], "%d", tmpBooks->data.pressYear);
 
     //test
     // cout << "here" << endl;
@@ -154,7 +152,7 @@ bool inputBookInfo(books *tmpBooks)
     // {
     //     cout << tmpBooks->data.info[i] << endl;
     // }
-    
+
     return true;
 }
 
@@ -170,4 +168,65 @@ void store()
     }
     delete pbooks;
     fout.close();
+}
+
+void bobbleSort(books *head, int way, int order)
+{
+    if (head == NULL || head->next == NULL)
+    {
+        cout << "无需要排序的数据" << endl;
+        return;
+    }
+    books *p = head;
+    bool j = 1;
+    while (j)
+    {
+        j = 0;
+        while (p->next)
+        {
+            bool b; //升序
+            bool t;
+            switch (way)
+            {
+            case 1:
+                b = p->data.num > p->next->data.num;
+                t = p->data.num == p->next->data.num;
+                break;
+            case 2:
+
+                b = strcmp(p->data.name, p->next->data.name) > 0;
+                t = p->data.name == p->next->data.name;
+                break;
+            case 3:
+                b = strcmp(p->data.author, p->next->data.author) > 0;
+                t = p->data.author == p->next->data.author;
+                break;
+            case 4:
+                b = p->data.price > p->next->data.price;
+                t = p->data.price == p->next->data.price;
+                break;
+            case 5:
+                b = strcmp(p->data.press, p->next->data.press) > 0;
+                t = p->data.press == p->next->data.press;
+                break;
+            case 6:
+                b = p->data.pressYear > p->next->data.pressYear;
+                t = p->data.pressYear == p->next->data.pressYear;
+                break;
+            default:
+                break;
+            }
+
+            if (order == 1) //改为降序
+                b = !b;
+
+            if (b && !t)
+            {
+                j = 1;
+                swap(p->data, p->next->data);
+            }
+            p = p->next;
+        }
+        p = head;
+    }
 }

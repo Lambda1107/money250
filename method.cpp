@@ -1,14 +1,15 @@
 //功能
 #include <fstream>
 #include "method.h"
+#include "utils.h"
 #include "Book.h"
-#include<iomanip>
+#include <iomanip>
 using namespace std;
 
 void listBooks()
 {
     books *p = HEADP;
-    cout << "进入listbook" << endl;
+    // cout << "进入listbook" << endl;
     if (!p)
     {
         cout << "图书数据为空" << endl;
@@ -42,8 +43,8 @@ void insertBook()
     dummuHead->next = HEADP;
     books *pBooks = dummuHead;
 
-    if (!findPos(pos-1, pBooks))
-    {//找到它前面一个位置
+    if (!findPos(pos - 1, pBooks))
+    { //找到它前面一个位置
         return;
     }
 
@@ -165,7 +166,7 @@ void findBook()
                 err();
                 return;
             }
-            findSomething(input,1);
+            findSomething(input, 1);
             break;
         case 3:
             cout << "请输入作者  ";
@@ -174,7 +175,7 @@ void findBook()
                 err();
                 return;
             }
-            findSomething(input,2);
+            findSomething(input, 2);
             break;
         case 4:
             cout << "请输入价格  ";
@@ -183,7 +184,7 @@ void findBook()
                 err();
                 return;
             }
-            findSomething(input,3);
+            findSomething(input, 3);
             break;
         case 5:
             cout << "请输入出版社  ";
@@ -192,7 +193,7 @@ void findBook()
                 err();
                 return;
             }
-            findSomething(input,4);
+            findSomething(input, 4);
             break;
         case 6:
             cout << "请输入出版时间  ";
@@ -201,7 +202,7 @@ void findBook()
                 err();
                 return;
             }
-            findSomething(input,5);
+            findSomething(input, 5);
             break;
         case 7:
             option = QUIT;
@@ -214,89 +215,8 @@ void findBook()
     } while (option != QUIT);
 }
 
-
 //***********************************************
 //后续代码是没有整理的
-
-
-void bobbleSort(int way, int order)
-{
-    if (HEADP == NULL || HEADP->next == NULL)
-    {
-        cout << "无需要排序的数据" << endl;
-        return;
-    }
-    books *p = NULL;
-    bool isChange = true;
-
-    int op;
-    if (!(check(op)))
-    {
-        err();
-        return;
-    }
-
-    switch (way)
-    {
-    case 1:
-        if (!order)
-        { //升序
-            while (p != HEADP->next && isChange)
-            {
-                books *q = HEADP;
-                isChange = false; //标志当前这一轮中又没有发生元素交换，如果没有则表示数组已经有序
-                for (; q->next && q->next != p; q = q->next)
-                {
-                    if (q->data.num > q->next->data.num)
-                    {
-                        swap(q->data, q->next->data);
-                        isChange = true;
-                    }
-                }
-                p = q;
-            }
-        }
-        else
-        { //降序
-            while (p != HEADP->next && isChange)
-            {
-                books *q = HEADP;
-                isChange = false; //标志当前这一轮中又没有发生元素交换，如果没有则表示数组已经有序
-                for (; q->next && q->next != p; q = q->next)
-                {
-                    if (q->data.num < q->next->data.num)
-                    {
-                        swap(q->data, q->next->data);
-                        isChange = true;
-                    }
-                }
-                p = q;
-            }
-        }
-        break; //剩下的排序等测过了直接粘贴很快的
-    case 2:
-
-        break;
-    case 3:
-
-        break;
-    case 4:
-
-        break;
-    case 5:
-
-        break;
-    case 6:
-
-        break;
-    case 7:
-        break;
-    default:
-        err();
-        break;
-    }
-    return;
-}
 
 void sortBook()
 {
@@ -325,6 +245,15 @@ void sortBook()
         return;
     }
 
+    if (method == 7)
+        return;
+
+    if (method < 1 || method > 7)
+    {
+        err();
+        return;
+    }
+
     cout << " 顺序选择：【0】升序， 【1】降序       ";
     int order = 0; //0升序，1降序
     if (!check(order))
@@ -333,31 +262,5 @@ void sortBook()
         return;
     }
 
-    //冒泡排序………………
-    books *pBooks1;
-    books *pBooks2;
-    switch (method)
-    {
-    case 1:
-
-        break;
-
-    case 2:
-        break;
-
-    case 3:
-        break;
-
-    case 4:
-        break;
-
-    case 5:
-        break;
-
-    case 6:
-        break;
-
-    case 7: //退出
-        break;
-    }
+    bobbleSort(HEADP, method, order);
 }

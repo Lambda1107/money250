@@ -4,6 +4,8 @@
 
 using namespace std;
 
+books *HEADP = nullptr;
+
 int main()
 {
     int option = 0;
@@ -16,7 +18,7 @@ int main()
         {
             continue;
         }
-        
+
         switch (option)
         {
         case 1: //显示图书数据
