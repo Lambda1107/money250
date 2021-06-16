@@ -69,6 +69,11 @@ bool findPos(int pos, books *&pBooks)
         //cout << "go next" << endl; //·½±ãdbug
         pBooks = pBooks->next;
     }
+    if (!pBooks)
+        {
+            err();
+            return false;
+        }
     return true;
 }
 

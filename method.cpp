@@ -32,16 +32,20 @@ void listBooks()
 void insertBook()
 {
     int pos;
+    books *dummuHead = new books;
+    dummuHead->next = HEADP;
+    books *pBooks = dummuHead;
     cout << "请输入要插入到的位置： ";
     if (!check(pos))
     {
         err();
         return;
     }
-
-    books *dummuHead = new books;
-    dummuHead->next = HEADP;
-    books *pBooks = dummuHead;
+    if (pos <= 0)
+    {
+        err();
+        return;
+    }
 
     if (!findPos(pos - 1, pBooks))
     { //找到它前面一个位置
@@ -142,7 +146,7 @@ void findBook()
         cout << "[7]    返回上一级功能" << endl;
         cout << endl;
         cout << "请输入查询方式： ";
-        if (!check(option) /*或者option超出范围*/)
+        if (!check(option) || option > 7 || option < 1)
         {
             err();
             continue;
@@ -214,9 +218,6 @@ void findBook()
         }
     } while (option != QUIT);
 }
-
-//***********************************************
-//后续代码是没有整理的
 
 void sortBook()
 {
